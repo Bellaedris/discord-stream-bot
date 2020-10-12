@@ -12,10 +12,6 @@ module.exports = {
 	execute(message, args) {
         let data;
 
-        if (args.length > 2) {
-            return message.author.send(`The correct usage is: ${prefix} ${name} ${usage}`);
-        }
-
         if (fs.existsSync(process.env.STREAMERS_FILE_LOCATION)) {
             //read the existing json file
             data = fs.readFileSync(process.env.STREAMERS_FILE_LOCATION)
@@ -40,6 +36,7 @@ module.exports = {
         console.log("file was written")
         data.streamers.push(newStreamer);
         
+        //write JSON file
         fs.writeFileSync(process.env.STREAMERS_FILE_LOCATION, JSON.stringify(data), (err) => {
             if (err) {
                 console.log("erreur lors de l'écriture du fichier");
